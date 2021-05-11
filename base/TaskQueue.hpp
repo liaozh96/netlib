@@ -36,7 +36,6 @@ private:
     bool _flag;
 };
 
-
 }//end of namespace netlib
 
 #endif

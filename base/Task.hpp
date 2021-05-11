@@ -3,7 +3,6 @@
 
 #include <functional>
 
-
 namespace netlib
 {
 

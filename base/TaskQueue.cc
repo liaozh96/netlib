@@ -1,7 +1,5 @@
 #include "TaskQueue.hpp"
 
-
-
 namespace netlib
 {
 

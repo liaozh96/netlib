@@ -18,7 +18,6 @@ Thread::~Thread()
     }
 }
 
-
 //star函数有this指针
 void Thread::start()
 {

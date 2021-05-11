@@ -7,7 +7,6 @@
 namespace netlib
 {
 
-
 class Condition
 : boost::noncopyable
 {
@@ -43,12 +42,6 @@ private:
     pthread_cond_t _pcond;
 };
 
-
-
-
 }// end of namespace netlib
-
-
-
 
 #endif

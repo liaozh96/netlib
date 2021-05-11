@@ -4,8 +4,6 @@
 #include "MutexLock.hpp"
 #include <boost/noncopyable.hpp>
 
-
-
 namespace netlib
 {
 

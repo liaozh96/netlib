@@ -1,7 +1,6 @@
 #ifndef __THREADPOOL_HPP__
 #define __THREADPOOL_HPP__
 
-
 #include "TaskQueue.hpp"
 #include "Thread.hpp"
 #include "Task.hpp"
