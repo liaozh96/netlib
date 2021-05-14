@@ -14,7 +14,7 @@ namespace netlib
 
 int SocketIO::readn(char *buff, int len)
 {
-    int left = len;
+    int left = len;//剩下left个字节数没有获取到
     char *p = buff;
 
     int ret = -1;
@@ -72,13 +72,14 @@ int SocketIO::writen(const char *buff, int len)
 
 int SocketIO::readline(char *buff, int maxlen)
 {
-    int left = maxlen - 1;
+    int left = maxlen - 1;//留一个字节存放'\0'
     char *p = buff;
     int ret = -1;
     int total = 0;
 
     while(left > 0)
     {
+        //MSG_PEEK预取内核接收缓冲区中的数据，而不移走数据
         ret = recv(_fd, p, left, MSG_PEEK);
         if(-1 == ret && EINTR == errno)
         {

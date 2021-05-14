@@ -1,7 +1,8 @@
-#ifndef __THREAD_HPP__
-#define __THREAD_HPP__
+#ifndef __NETLIB_THREAD_HPP__
+#define __NETLIB_THREAD_HPP__
 
-#include <boost/noncopyable.hpp>
+#include "Noncopyable.hpp"
+
 #include <pthread.h>
 #include <functional>
 #include <string>
@@ -10,13 +11,13 @@ namespace netlib
 {
 
 class Thread
-: boost::noncopyable
+: Noncopyable
 {
 public:
     
-    using ThreadCallback = std::function<void ()>;
+    using ThreadCallback = std::function<void()>;
     
-    //右值引用是为了减少赋值的开销
+    //右值引用是为了减少复制的开销
     Thread(ThreadCallback && thFunc);
     ~Thread();
 
@@ -31,7 +32,11 @@ private:
 
 private:
     pthread_t _pthid;
+    //线程状态
+    //true为线程存在
+    //false为线程未创建或已被回收
     bool _isRunning;
+
     ThreadCallback _cbFunc;
 };
 

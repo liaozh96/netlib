@@ -25,15 +25,17 @@ bool TaskQueue::full() const
 void TaskQueue::push(const ElemType &e)
 {
 
-    //RAII计数解决死锁的问题
+    //RAII技术解决死锁的问题
     MutexLockGuard autolock(_mutex);
-    while(full())//用while防止虚假唤醒
+   
+    //用while防止虚假唤醒
+    //
+    while(full())
     {
         _notFull.wait();
     }
 
     _queue.push(e);
-    //return
     
     _notEmpty.notify();
 }
@@ -59,7 +61,6 @@ ElemType TaskQueue::pop()
     {
         return nullptr;
     }
-    
 }
 
 void TaskQueue::wakeup()

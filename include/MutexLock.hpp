@@ -1,14 +1,15 @@
 #ifndef __NETLIB_MUTEXLCOK_HPP_
 #define __NETLIB_MUTEXLOCK_HPP_
 
+#include "Noncopyable.hpp"
+
 #include <pthread.h>
-#include <boost/utility.hpp>
 
 namespace netlib
 {
 
 class MutexLock
-: boost::noncopyable
+: Noncopyable
 {
 public:
     MutexLock()
@@ -41,5 +42,29 @@ private:
     pthread_mutex_t _mutex;
 };
 
-}//end of namespace netlib
+//利用RAII技术控制锁的生命周期
+class MutexLockGuard
+: Noncopyable
+{
+public:
+    MutexLockGuard(MutexLock &mutex)
+    : _mutex(mutex)
+    {
+        _mutex.lock();
+    }
+
+    ~MutexLockGuard()
+    {
+        _mutex.unlock();
+    }
+
+private:
+    MutexLock &_mutex;
+};
+
+
+}//end of netlib
+
+#define MutexLockGuard(x) static_assert(false,"missing mutex guard var name")
+
 #endif

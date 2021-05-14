@@ -1,13 +1,13 @@
 #ifndef __NETLIB_SOCKET_HPP__
 #define __NETLIB_SOCKET_HPP__
 
-#include <boost/noncopyable.hpp>
+#include "Noncopyable.hpp"
 
 namespace netlib
 {
 
 class Socket
-: boost::noncopyable
+: Noncopyable
 {
 public:
     Socket();

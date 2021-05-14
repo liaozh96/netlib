@@ -2,44 +2,44 @@
 #define __NETLIB_CONDITION_HPP__
 
 #include "MutexLock.hpp"
-#include <boost/noncopyable.hpp>
+#include "Noncopyable.hpp"
 
 namespace netlib
 {
 
 class Condition
-: boost::noncopyable
+: Noncopyable
 {
 public:
     Condition(MutexLock &mutex)
     : _mutex(mutex)
     {
-        pthread_cond_init(&_pcond,NULL);
+        pthread_cond_init(&_cond, nullptr);
     }
 
     ~Condition()
     {
-        pthread_cond_destroy(&_pcond);
+        pthread_cond_destroy(&_cond);
     }
 
     void wait()
     {
-        pthread_cond_wait(&_pcond,_mutex.getThreadMutex());
+        pthread_cond_wait(&_cond, _mutex.getThreadMutex());
     }
 
     void notify()
     {
-        pthread_cond_signal(&_pcond); 
+        pthread_cond_signal(&_cond); 
     }
 
     void notifyAll()
     {
-        pthread_cond_broadcast(&_pcond);
+        pthread_cond_broadcast(&_cond);
     }
 
 private:
     MutexLock &_mutex;
-    pthread_cond_t _pcond;
+    pthread_cond_t _cond;
 };
 
 }// end of namespace netlib

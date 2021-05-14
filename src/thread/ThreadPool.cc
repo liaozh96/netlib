@@ -51,6 +51,7 @@ Task Threadpool::getTask()
 
 void Threadpool::stop()
 {
+    //退出线程池之前要确保任务都已经完成
     while(!_taskqueue.empty())
     {
         sleep(1);

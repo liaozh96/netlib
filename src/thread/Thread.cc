@@ -1,4 +1,5 @@
 #include "Thread.hpp"
+
 #include <stdio.h>
 #include <string>
 
@@ -8,7 +9,7 @@ namespace netlib
 Thread::Thread(ThreadCallback &&cbFunc)
 : _pthid(0)
 , _isRunning(false)
-, _cbFunc(std::move(cbFunc)){}
+, _cbFunc(std::move(cbFunc)){}//注册回调函数
 
 Thread::~Thread()
 {
@@ -26,7 +27,6 @@ void Thread::start()
         perror("pthread_create");
         return;
     }
-
     _isRunning = true;
 }
 
@@ -37,7 +37,6 @@ void *Thread::ThreadFunc(void *arg)
     {
         pthread->_cbFunc();
     }
-
     return nullptr;
 }
 

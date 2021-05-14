@@ -1,8 +1,7 @@
-#ifndef __TASKQUEUE_HPP__
-#define __TASKQUEUE_HPP__
+#ifndef __NETLIB_TASKQUEUE_HPP__
+#define __NETLIB_TASKQUEUE_HPP__
 
 #include "MutexLock.hpp"
-#include "MutexLockGuard.hpp"
 #include "Condition.hpp"
 #include "Task.hpp"
 

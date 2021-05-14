@@ -32,16 +32,16 @@ void Acceptor::setReuseAddr()
     int on = 1;
     if(setsockopt(fd(), SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0)
     {
-        perror("setsockopt");
+        perror("setsockopt reuseaddr");
     }
 }
 
 void Acceptor::setReusePort()
 {
     int on = 1;
-    if(setsockopt(fd(), SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0)
+    if(setsockopt(fd(), SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on)) < 0)
     {
-        perror("setsockopt");
+        perror("setsockopt reuseport");
     }
 }
 

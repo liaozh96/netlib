@@ -1,5 +1,5 @@
-#ifndef __NONCOPYABLE_HPP__
-#define __NONCOPYABLE_HPP__
+#ifndef __NETLIB_NONCOPYABLE_HPP__
+#define __NETLIB_NONCOPYABLE_HPP__
 
 namespace netlib
 {
@@ -13,6 +13,9 @@ protected:
     Noncopyable(const Noncopyable &) = delete ;
     Noncopyable & operator=(const Noncopyable &) = delete;
 };
+
+class Copyable
+{};
 
 }//end of namespace netlib
 

@@ -1,5 +1,5 @@
-#ifndef __THREADPOOL_HPP__
-#define __THREADPOOL_HPP__
+#ifndef __NETLIB_THREADPOOL_HPP__
+#define __NETLIB_THREADPOOL_HPP__
 
 #include "TaskQueue.hpp"
 #include "Thread.hpp"
@@ -36,6 +36,7 @@ private:
     TaskQueue _taskqueue;
     bool _isExit;
 };
+
 }//end of namespace netlib
 
 #endif
