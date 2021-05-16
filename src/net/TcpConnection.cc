@@ -1,4 +1,5 @@
 #include "TcpConnection.hpp"
+#include "EventLoop.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -10,11 +11,12 @@ using std::ostringstream;
 namespace netlib
 {
 
-TcpConnection::TcpConnection(int fd)
+TcpConnection::TcpConnection(int fd, EventLoop *loop)
 : _sock(fd)
 , _sockIO(fd)
 , _localAddr(getLocalAddr())
 , _peerAddr(getPeerAddr())
+, _loop(loop)
 , _isShutdownWrite(false){}
 
 string TcpConnection::receive()
@@ -27,6 +29,14 @@ string TcpConnection::receive()
 void TcpConnection::send(const string &msg)
 {
     _sockIO.writen(msg.c_str(), msg.size());
+}
+
+void TcpConnection::sendInLoop(const string &msg)
+{
+    if(_loop)
+    {
+        _loop->runInLoop(std::bind(&TcpConnection::send, this, msg));
+    }
 }
 
 string TcpConnection::toString() const
@@ -45,6 +55,7 @@ bool TcpConnection::isClosed() const
     do {
        nret = ::recv(_sock.fd(), buff, sizeof(buff), MSG_PEEK);
     }while( -1 == nret && EINTR == errno);
+    
     return nret == 0;
 }
 
@@ -110,4 +121,3 @@ InetAddress TcpConnection::getPeerAddr()
 }
 
 }//end of namespace netlib
-
